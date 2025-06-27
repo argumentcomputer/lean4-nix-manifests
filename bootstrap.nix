@@ -1,6 +1,6 @@
 {
-  tag = "v4.16.0";
-  rev = "128a1e6b0a82718382f9c39c79be44ff3284547c";
+  tag = "v4.17.0";
+  rev = "306f36116535cd226329f562b4675b8b6dbf948c";
   bootstrap = {
     src,
     debug ? false,
@@ -21,6 +21,7 @@
     symlinkJoin,
     lndir,
     perl,
+    pkg-config,
     gnused,
     darwin,
     llvmPackages,
@@ -33,7 +34,7 @@
       buildCMake = args:
         stdenv.mkDerivation ({
             nativeBuildInputs = [cmake];
-            buildInputs = [gmp libuv llvmPackages.llvm];
+            buildInputs = [gmp libuv llvmPackages.llvm pkg-config];
             # https://github.com/NixOS/nixpkgs/issues/60919
             hardeningDisable = ["all"];
             dontStrip = args.debug or debug;
