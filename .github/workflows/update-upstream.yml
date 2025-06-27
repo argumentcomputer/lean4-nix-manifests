@@ -1,0 +1,23 @@
+# Triggers manifest update workflow in https://github.com/argumentcomputer/lean4-nix on every push to `main`
+
+name: Lean4-nix manifest update
+
+on:
+  push:
+    branches: main
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.TOKEN_APP_ID }}
+          private_key: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
+      - run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/argumentcomputer/lean4-nix/dispatches \
+          -d '{"event_type":"update-manifest"}'
