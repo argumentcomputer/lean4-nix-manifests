@@ -1,6 +1,6 @@
 {
-  tag = "v4.20.0";
-  rev = "77cfc4d1a4f6ef6651792b781eaa6676b4f3f060";
+  tag = "v4.20.1";
+  rev = "b02228b03f655c0cd051d82280ad5758359ec8ba";
   bootstrap = {
     debug ? false,
     stage0debug ? false,
